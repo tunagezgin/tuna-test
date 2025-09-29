@@ -1,9 +1,10 @@
-# buildspec.yml
 version: 0.2
+
 env:
   variables:
     REPOSITORY_URI: 677276116587.dkr.ecr.us-east-1.amazonaws.com/tuna/repo
     IMAGE_TAG: latest
+
 phases:
   pre_build:
     commands:
@@ -18,7 +19,7 @@ phases:
       - echo Pushing Docker image to ECR...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"tuna-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"my-container","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
